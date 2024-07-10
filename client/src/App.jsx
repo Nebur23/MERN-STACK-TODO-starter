@@ -1,7 +1,9 @@
+import Home from "./pages/Home";
+
 function App() {
   return (
-    <div className='text-3xl flex-box h-screen'>
-      <p> MERN Stack Todo App Starter code</p>
+    <div>
+      <Home />
     </div>
   );
 }
