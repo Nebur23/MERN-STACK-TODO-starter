@@ -3,8 +3,11 @@ import { MdClose } from "react-icons/md";
 import PropTypes from "prop-types";
 import { toast } from "react-toastify";
 import TagInput from "./TagInput";
+import { axiosInstance } from "../api/axios";
 
-const TodoModal = ({ onClose, Todo, type }) => {
+const api_url = "/todo";
+
+const TodoModal = ({ onClose, Todo, type, fetchTodos }) => {
   const [todoElt, setTodoElt] = useState({
     title: Todo?.title || "",
     content: Todo?.content || "",
@@ -30,8 +33,45 @@ const TodoModal = ({ onClose, Todo, type }) => {
     }
   };
 
-  const AddNewTodo = async () => {};
-  const editTodo = async () => {};
+  const AddNewTodo = async () => {
+    try {
+      const response = await axiosInstance.post(`${api_url}/createTodo`, {
+        ...todoElt,
+        tags,
+      });
+      if (response.data && response.data.todos) {
+        fetchTodos();
+        onClose();
+      }
+    } catch (err) {
+      if (err.response) {
+        const { status } = err.response;
+        if (status === 500) {
+          toast.error("could not create todos", { autoClose: 1000 });
+        }
+      }
+    }
+  };
+  const editTodo = async () => {
+    try {
+      const response = await axiosInstance.put(
+        `${api_url}/editTodo/${Todo._id}`,
+        { ...todoElt, tags },
+        { withCredentials: true }
+      );
+      if (response.data) {
+        fetchTodos();
+        onClose();
+      }
+    } catch (err) {
+      if (err.response) {
+        const { status } = err.response;
+        if (status === 500) {
+          toast.error("could not create todos", { autoClose: 1000 });
+        }
+      }
+    }
+  };
   return (
     <div className='card w-full h-full  flex flex-col'>
       <button
@@ -49,7 +89,6 @@ const TodoModal = ({ onClose, Todo, type }) => {
           value={todoElt.title}
           onChange={handleTodoEltChange}
           name='title'
-          required
         />
       </div>
 
@@ -83,6 +122,7 @@ TodoModal.propTypes = {
   onClose: PropTypes.func.isRequired,
   type: PropTypes.string.isRequired,
   Todo: PropTypes.object,
+  fetchTodos: PropTypes.func,
 };
 
 export default TodoModal;
