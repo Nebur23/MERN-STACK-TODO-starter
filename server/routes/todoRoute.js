@@ -3,8 +3,7 @@
 import express from "express";
 import * as todo from "../controllers/todoController.js";
 
-
-const todos = express.Router();
+const todos=express.Router()
 
 /**
  * @swagger
@@ -69,7 +68,7 @@ const todos = express.Router();
  *             schema:
  *               $ref: '#/components/schemas/Todo'
  */
-todos.post("/createTodo",  todo.createTodo);
+
 
 
 
@@ -106,7 +105,7 @@ todos.post("/createTodo",  todo.createTodo);
  *             schema:
  *               $ref: '#/components/schemas/Todo'
  */
-todos.put("/editTodo/:id",  todo.editTodo);
+
 
 /**
  * @swagger
@@ -137,7 +136,7 @@ todos.put("/editTodo/:id",  todo.editTodo);
  *       403:
  *         description: Unauthorized
  */
-todos.put("/editPin/:id",  todo.updatePin);
+
 
 /**
  * @swagger
@@ -161,7 +160,7 @@ todos.put("/editPin/:id",  todo.updatePin);
  *               items:
  *                 $ref: '#/components/schemas/Todo'
  */
-todos.get("/getTodo", todo.getTodo);
+
 
 /**
  * @swagger
@@ -186,6 +185,6 @@ todos.get("/getTodo", todo.getTodo);
  *       403:
  *         description: Unauthorized
  */
-todos.delete("/deleteTodo/:id",  todo.deleteTodo);
+
 
 export default todos;

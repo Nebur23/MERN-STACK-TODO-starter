@@ -5,14 +5,9 @@ import { connectDB } from "./utils/connectDB.js";
 import cors from "cors";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
-
-import todos from "./routes/todoRoute.js";
-import Swagger from "./utils/Swagger.js";
 import credentials from "./middlewares/credentials.js";
 import allowedOrigins from "./utils/allowedOrigins.js";
-
 app.use(credentials);
-
 const corpsOtions = {
   origin: (origin, callback) => {
     if (allowedOrigins.indexOf(origin) !== 1 || !origin) {
@@ -33,7 +28,6 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 
-app.use("/todo", todos);
 
 config();
 const PORT = process.env.PORT || 443;
