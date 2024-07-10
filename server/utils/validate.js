@@ -1,7 +1,7 @@
 import joi from "joi";
 export const register = data => {
   const schema = joi.object({
-    name: joi.string().min(2).required(),
+    name: joi.string().min(5).required(),
     password: joi.string().min(5).required(),
     email: joi.string().email().required(),
   });

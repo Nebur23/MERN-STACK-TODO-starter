@@ -5,7 +5,7 @@ import { connectDB } from "./utils/connectDB.js";
 import cors from "cors";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
-import auth from "./routes/authRoute.js";
+
 import todos from "./routes/todoRoute.js";
 import Swagger from "./utils/Swagger.js";
 import credentials from "./middlewares/credentials.js";
@@ -32,7 +32,7 @@ app.use(express.json());
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
-app.use("/auth", auth);
+
 app.use("/todo", todos);
 
 config();

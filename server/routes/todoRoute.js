@@ -2,7 +2,7 @@
 
 import express from "express";
 import * as todo from "../controllers/todoController.js";
-import { verifyJWT } from "../middlewares/verify.js";
+
 
 const todos = express.Router();
 
@@ -69,9 +69,9 @@ const todos = express.Router();
  *             schema:
  *               $ref: '#/components/schemas/Todo'
  */
-todos.post("/createTodo", verifyJWT, todo.createTodo);
+todos.post("/createTodo",  todo.createTodo);
 
-todos.get("/searchTodo", verifyJWT, todo.searchTodo);
+
 
 /**
  * @swagger
@@ -106,7 +106,7 @@ todos.get("/searchTodo", verifyJWT, todo.searchTodo);
  *             schema:
  *               $ref: '#/components/schemas/Todo'
  */
-todos.put("/editTodo/:id", verifyJWT, todo.editTodo);
+todos.put("/editTodo/:id",  todo.editTodo);
 
 /**
  * @swagger
@@ -123,6 +123,12 @@ todos.put("/editTodo/:id", verifyJWT, todo.editTodo);
  *           type: string
  *         required: true
  *         description: The todo id
+ *     requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *             $ref: '#/components/schemas/Todo'
  *     responses:
  *       200:
  *         description: The updated pin status.
@@ -131,7 +137,7 @@ todos.put("/editTodo/:id", verifyJWT, todo.editTodo);
  *       403:
  *         description: Unauthorized
  */
-todos.put("/editPin/:id", verifyJWT, todo.updatePin);
+todos.put("/editPin/:id",  todo.updatePin);
 
 /**
  * @swagger
@@ -155,7 +161,7 @@ todos.put("/editPin/:id", verifyJWT, todo.updatePin);
  *               items:
  *                 $ref: '#/components/schemas/Todo'
  */
-todos.get("/getTodo", verifyJWT, todo.getTodo);
+todos.get("/getTodo", todo.getTodo);
 
 /**
  * @swagger
@@ -180,6 +186,6 @@ todos.get("/getTodo", verifyJWT, todo.getTodo);
  *       403:
  *         description: Unauthorized
  */
-todos.delete("/deleteTodo/:id", verifyJWT, todo.deleteTodo);
-todos.get("/searchTodo", verifyJWT, todo.searchTodo);
+todos.delete("/deleteTodo/:id",  todo.deleteTodo);
+
 export default todos;

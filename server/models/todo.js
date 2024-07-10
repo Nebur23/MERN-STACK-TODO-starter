@@ -1,10 +1,6 @@
 import mongoose from "mongoose"
 const todoSchema=mongoose.Schema({
-    User:{
-        type:mongoose.Schema.Types.ObjectId,
-        required:true,
-        ref:'user',
-    },
+  
     title:{
         type:String
     },

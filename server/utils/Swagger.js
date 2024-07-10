@@ -14,20 +14,8 @@ const options = {
         url: 'http://localhost:3000', // Replace with your server URL
       },
     ],
-    components: {
-      securitySchemes: {
-        bearerAuth: {
-          type: 'http',
-          scheme: 'bearer',
-          bearerFormat: 'JWT',
-        },
-      },
-    },
-    security: [
-      {
-        bearerAuth: [],
-      },
-    ],
+   
+   
   },
   
   apis: ['./routes/*.js'], // files containing annotations for Swagger
@@ -36,5 +24,5 @@ const options = {
 const swaggerSpec = swaggerJsdoc(options);
 
 export default (app) => {
-  app.use('/todoApi-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+  app.use('/todoApi', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 };
